@@ -12,6 +12,7 @@ import SDWebImageSwiftUI
 struct CardView: View{
     
     let item: Item
+    let changeQuantity: ChangeQuantity
     
     @State private var showFullInamge: Bool = false
     
@@ -71,7 +72,7 @@ struct CardView: View{
             
             if(item.quantity > 1){
                 Button(action:{
-                    
+                    changeQuantity.AddRemove(item: item, amount: -1)
                 }){
                     Image(systemName: "minus.circle")
                 }
@@ -80,7 +81,7 @@ struct CardView: View{
                 Text("\(item.quantity - 1)")
                 
                 Button(action:{
-                    
+                    changeQuantity.AddRemove(item: item, amount: 1)
                 }){
                     Image(systemName: "plus.circle")
                 }
@@ -89,7 +90,7 @@ struct CardView: View{
             } else {
                 if(item.availability.isAvailable){
                     Button(action:{
-                        
+                        changeQuantity.AddRemove(item: item, amount: 1)
                     }){
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(Color("AccentAction"))
@@ -111,8 +112,8 @@ struct CardView: View{
     }
 }
 
-struct CardViewProvider: PreviewProvider {
-    static var previews: some View {
-        CardView(item: Item.example).preferredColorScheme(.light)
-        }
-    }
+//struct CardViewProvider: PreviewProvider {
+//    static var previews: some View {
+//        CardView(item: Item.example).preferredColorScheme(.light)
+//        }
+//    }

@@ -17,9 +17,13 @@ struct Items: Codable {
 
 struct Item: Codable {
     let product: Product
-    let quantity: Int
+    var quantity: Int
     let displayPriceTotal, discountedDisplayPriceTotal: String
     let availability: Availability
+    
+    mutating func changeQuantity(amount: Int){
+        self.quantity += amount
+    }
 
     enum CodingKeys: String, CodingKey {
         case product, quantity

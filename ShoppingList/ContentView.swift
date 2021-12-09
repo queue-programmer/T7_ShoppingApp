@@ -7,19 +7,23 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, ChangeQuantity {
+    func AddRemove(item: Item, amount: Int) {
+        viewModel.ChangeItemQuantity(item: item, amount: amount)
+    }
+    
     
     @StateObject var viewModel = ViewModel()
     
     
-    var body: some View {
+    var body: some View{
         ScrollView{
             VStack(spacing: 0){
             
                 if let shoppingCart = viewModel.shoppingCart{
                     ForEach(0..<shoppingCart.count){ i in
                         
-                        CardView(item: shoppingCart[i])
+                        CardView(item: shoppingCart[i], changeQuantity: self)
                     }
                 }
                 

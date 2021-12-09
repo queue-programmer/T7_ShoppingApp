@@ -19,6 +19,13 @@ class ViewModel: ObservableObject {
         loadShoppingCart()
     }
     
+    func ChangeItemQuantity(item: Item, amount: Int){
+        
+        let index = self.shoppingCart?.firstIndex{$0.product.id == item.product.id}
+        
+        self.shoppingCart?[index!].changeQuantity(amount: amount)
+    }
+    
     func loadShoppingCart() {
         if let url = URL(string: "https://api.jsonbin.io/b/60832bec4465377a6bc6b6e6"){
             jsonLogic.performRequest(url){
