@@ -18,6 +18,7 @@ struct ContentView: View {
             
                 if let shoppingCart = viewModel.shoppingCart{
                     ForEach(0..<shoppingCart.count){ i in
+                        
                         CardView(item: shoppingCart[i])
                     }
                 }
@@ -30,7 +31,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().preferredColorScheme(.dark)
         ContentView().preferredColorScheme(.light)
     }
 }

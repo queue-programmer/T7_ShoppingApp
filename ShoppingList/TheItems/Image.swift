@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Image: Codable {
+struct Picture: Codable {
     let thumbnail, large: Large
 }
 

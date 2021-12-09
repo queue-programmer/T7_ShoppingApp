@@ -14,7 +14,7 @@ struct Product: Codable {
     let brandID: Int?
     let name, nameExtra: String
     let frontURL: String
-    let images: [Image]
+    let images: [Picture]
     let grossPrice, grossUnitPrice, unitPriceQuantityAbbreviation, unitPriceQuantityName: String
     let discount: Discount?
     let promotion: Promotion?

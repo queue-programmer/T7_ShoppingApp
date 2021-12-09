@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		279C0CED2762539D0034F68F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 279C0CEC2762539D0034F68F /* SDWebImageSwiftUI */; };
+		279C0CF527625E8C0034F68F /* Rubik in Resources */ = {isa = PBXBuildFile; fileRef = 279C0CF427625E8C0034F68F /* Rubik */; };
 		DD2217A12719F2CC007F3471 /* ShoppingListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2217A02719F2CC007F3471 /* ShoppingListApp.swift */; };
 		DD2217A32719F2CC007F3471 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2217A22719F2CC007F3471 /* ContentView.swift */; };
 		DD2217A52719F2CE007F3471 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD2217A42719F2CE007F3471 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		279C0CF427625E8C0034F68F /* Rubik */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Rubik; path = ../../Downloads/Rubik; sourceTree = "<group>"; };
+		279C0CF627625FF70034F68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD22179D2719F2CC007F3471 /* ShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD2217A02719F2CC007F3471 /* ShoppingListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListApp.swift; sourceTree = "<group>"; };
 		DD2217A22719F2CC007F3471 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279C0CED2762539D0034F68F /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +99,7 @@
 		DD2217942719F2CC007F3471 = {
 			isa = PBXGroup;
 			children = (
+				279C0CF427625E8C0034F68F /* Rubik */,
 				DD22179F2719F2CC007F3471 /* ShoppingList */,
 				DD2217B02719F2CE007F3471 /* ShoppingListTests */,
 				DD2217BA2719F2CE007F3471 /* ShoppingListUITests */,
@@ -114,6 +120,7 @@
 		DD22179F2719F2CC007F3471 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				279C0CF627625FF70034F68F /* Info.plist */,
 				DD988CEC271B2EDC00B56143 /* TheItems */,
 				DD2217A02719F2CC007F3471 /* ShoppingListApp.swift */,
 				DD3F82F7271EFF23000807BF /* JsonLogic.swift */,
@@ -181,6 +188,9 @@
 			dependencies = (
 			);
 			name = ShoppingList;
+			packageProductDependencies = (
+				279C0CEC2762539D0034F68F /* SDWebImageSwiftUI */,
+			);
 			productName = ShoppingList;
 			productReference = DD22179D2719F2CC007F3471 /* ShoppingList.app */;
 			productType = "com.apple.product-type.application";
@@ -253,6 +263,9 @@
 				Base,
 			);
 			mainGroup = DD2217942719F2CC007F3471;
+			packageReferences = (
+				279C0CEB2762539D0034F68F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = DD22179E2719F2CC007F3471 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -269,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279C0CF527625E8C0034F68F /* Rubik in Resources */,
 				DD2217A82719F2CE007F3471 /* Preview Assets.xcassets in Resources */,
 				DD2217A52719F2CE007F3471 /* Assets.xcassets in Resources */,
 			);
@@ -470,6 +484,7 @@
 				DEVELOPMENT_TEAM = THJVC89RZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -500,6 +515,7 @@
 				DEVELOPMENT_TEAM = THJVC89RZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -655,6 +671,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		279C0CEB2762539D0034F68F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		279C0CEC2762539D0034F68F /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 279C0CEB2762539D0034F68F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD2217952719F2CC007F3471 /* Project object */;
 }
