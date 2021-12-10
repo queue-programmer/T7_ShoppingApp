@@ -17,7 +17,7 @@ struct Items: Codable {
 
 struct Item: Codable {
     let product: Product
-    var quantity: Int
+    var quantity: Int = 0
     let displayPriceTotal, discountedDisplayPriceTotal: String
     let availability: Availability
     
@@ -26,7 +26,7 @@ struct Item: Codable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case product, quantity
+        case product
         case displayPriceTotal = "display_price_total"
         case discountedDisplayPriceTotal = "discounted_display_price_total"
         case availability

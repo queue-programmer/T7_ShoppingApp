@@ -1,15 +1,19 @@
-//
 //  ViewModel.swift
 //  ShoppingList
 //
 //  Created by Yme Knudsen Bogfjelldal on 19/10/2021.
-//
 
 import Foundation
+import SwiftUI
 
 class ViewModel: ObservableObject {
     
     @Published var shoppingCart: [Item]?
+    
+    @Published var stuffCart: Int = 0
+    @Published var totalPrice: Double = 0.00
+    
+//    @Published var shoppingCartContents: [Item]
     
     let jsonLogic: JsonLogic = JsonLogic()
     
@@ -21,9 +25,19 @@ class ViewModel: ObservableObject {
     
     func ChangeItemQuantity(item: Item, amount: Int){
         
-        let index = self.shoppingCart?.firstIndex{$0.product.id == item.product.id}
-        
+        let index = self.shoppingCart?.firstIndex{$0.product.id == item.product.id}  
         self.shoppingCart?[index!].changeQuantity(amount: amount)
+        
+        stuffCart += amount
+        totalPrice += Double(item.product.grossPrice)! * Double(amount)
+    }
+    
+    func updateShoppingCart(){
+        if shoppingCart != nil{
+            for item in shoppingCart!{
+                ChangeItemQuantity(item: item, amount: item.quantity)
+            }
+        }
     }
     
     func loadShoppingCart() {
@@ -35,50 +49,35 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func saveTheShoppingCart(){
+        guard let data = try? JSONEncoder().encode(shoppingCart) else {
+            return
+        }
+        UserDefaults.standard.set(data, forKey: "SaveShoppingCart")
+    }
+    
+    func loadTheShoppingCart(){
+        var itemCache: [Item]?
+        if let data = UserDefaults.standard.data(forKey: "SaveShoppingCart"){
+            itemCache = try? JSONDecoder().decode([Item].self, from: data)
+        }
+        if itemCache != nil && itemCache?.count != 0 {
+            shoppingCart = itemCache
+            updateShoppingCart()
+        }
+    }
+    
     private func recieveData(result: Result<Items?, Error>) {
         switch result{
         case .success(let items):
             DispatchQueue.main.async { [weak self] in
                 self?.shoppingCart = items?.items
+                self?.loadTheShoppingCart()
             }
         case .failure(let error):
-            print(error)
+            DispatchQueue.main.async { [weak self] in
+                print(error)
+            }
         }
     }
 }
-
-//private func performRequest(_ url: URL, completion: @escaping ((Result<WeatherCondition?, Error>) -> Void)) {
-//    URLSession.shared.dataTask(with: url) { data, response, error in
-//        if let error = error {
-//            completion(.failure(error))
-//            return
-//        }
-//
-//        if let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
-//            completion(.failure(NetworkError.failedRequest))
-//            return
-//        }
-//
-//        if let data = data {
-//            do {
-//                let decodedData = try JSONDecoder().decode(WeatherData.self, from: data)
-//                guard let id = decodedData.weather.first?.id else {
-//                    completion(.failure(NetworkError.failedJson))
-//                    return
-//                }
-//
-//                let name = decodedData.name
-//                let temperature = decodedData.main.temp
-//
-//
-//                let weatherCondition = WeatherCondition(conditionId: id,
-//                                                        cityName: name,
-//                                                        temperature: temperature)
-//                completion(.success(weatherCondition))
-//
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        }
-//    }.resume()
-//}

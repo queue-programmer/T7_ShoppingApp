@@ -37,7 +37,6 @@ struct CardView: View{
             VStack(alignment: .leading){
                 Text(item.product.name)
                     .font(Font.custom("Rubik-Medium", size: 14.0))
-    //                .frame(width: 400, height: 100)
                 if item.product.availability.isAvailable{
                     Text(item.product.nameExtra)
                         .font(Font.custom("Rubik-Regular", size: 14.0))
@@ -51,7 +50,7 @@ struct CardView: View{
             Spacer()
             
             VStack(alignment: .trailing){
-                if item.quantity <= 1{
+                if item.quantity < 1{
                     if item.product.discount != nil {
                         Text("kr \(item.discountedDisplayPriceTotal)" )
                             .font(Font.custom("Rubik-Regular", size: 14.0))
@@ -70,7 +69,7 @@ struct CardView: View{
                 }
             }
             
-            if(item.quantity > 1){
+            if(item.quantity > 0){
                 Button(action:{
                     changeQuantity.AddRemove(item: item, amount: -1)
                 }){
@@ -78,7 +77,7 @@ struct CardView: View{
                 }
                 .frame(width: 32.0, height: 32.0)
                 
-                Text("\(item.quantity - 1)")
+                Text("\(item.quantity)")
                 
                 Button(action:{
                     changeQuantity.AddRemove(item: item, amount: 1)

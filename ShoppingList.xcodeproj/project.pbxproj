@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275AD6992763DDEE00BD6FB2 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275AD6982763DDEE00BD6FB2 /* CartView.swift */; };
 		279C0CED2762539D0034F68F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 279C0CEC2762539D0034F68F /* SDWebImageSwiftUI */; };
 		279C0CF527625E8C0034F68F /* Rubik in Resources */ = {isa = PBXBuildFile; fileRef = 279C0CF427625E8C0034F68F /* Rubik */; };
 		279C0CF827628D830034F68F /* ChangeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C0CF727628D830034F68F /* ChangeQuantity.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		275AD6982763DDEE00BD6FB2 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		279C0CF427625E8C0034F68F /* Rubik */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Rubik; path = ../../Downloads/Rubik; sourceTree = "<group>"; };
 		279C0CF627625FF70034F68F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		279C0CF727628D830034F68F /* ChangeQuantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeQuantity.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				DD2217A42719F2CE007F3471 /* Assets.xcassets */,
 				DD2217A62719F2CE007F3471 /* Preview Content */,
 				279C0CF727628D830034F68F /* ChangeQuantity.swift */,
+				275AD6982763DDEE00BD6FB2 /* CartView.swift */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				DD2217A32719F2CC007F3471 /* ContentView.swift in Sources */,
 				DD3F82FA271F0C5B000807BF /* ViewModel.swift in Sources */,
 				DD3F82F8271EFF23000807BF /* JsonLogic.swift in Sources */,
+				275AD6992763DDEE00BD6FB2 /* CartView.swift in Sources */,
 				DD2217CB2719F3F0007F3471 /* CardView.swift in Sources */,
 				DD3F82F4271EF40D000807BF /* Promotion.swift in Sources */,
 				279C0CF827628D830034F68F /* ChangeQuantity.swift in Sources */,
