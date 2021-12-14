@@ -13,35 +13,31 @@ struct ContentView: View, ChangeQuantity {
     }
     
     @StateObject var viewModel = ViewModel()
-//
-//    mutable var cartContent: Int = 0
-    
-//    var priceTotal: Double = 0.00
-    
-//    func stuffCart(item: Item) -> View{
-//        if (item.quantity > 0){
-//            cartContent += item.quantity
-//            priceTotal += Double(item.product.grossPrice) * Double(item.quantity)
-//        }
-//        return EmptyView()
-//    }
     
     var body: some View{
-        ScrollView{
-            VStack(spacing: 0){
-            
-                if let shoppingCart = viewModel.shoppingCart{
-                    ForEach(0..<shoppingCart.count){ i in
-                        
-//                        stuffCart(item: shoppingCart[i])
-                        CardView(item: shoppingCart[i], changeQuantity: self)
+        
+        if viewModel.state == Appstate.loading{
+            ProgressView()
+        } else if viewModel.state == Appstate.error{
+            Button("Reload"){
+                viewModel.loadShoppingCart()
+            }
+        } else if viewModel.state == Appstate.succsess{
+            ScrollView{
+                VStack(spacing: 0){
+                
+                    if let shoppingCart = viewModel.shoppingCart{
+                        ForEach(0..<shoppingCart.count){ i in
+                            CardView(item: shoppingCart[i], changeQuantity: self)
+                        }
                     }
                 }
+    //            .navigationTitle("Shopping Cart")
             }
-            .navigationTitle("Shopping Cart")
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)){ _ in
-            viewModel.saveTheShoppingCart()
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)){ _ in
+                viewModel.saveTheShoppingCart()
+                
+            }
         }
         shoppingCartView(itemsInTheCart: viewModel.stuffCart, totalPrice: viewModel.totalPrice)
     }

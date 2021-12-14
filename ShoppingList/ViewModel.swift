@@ -6,12 +6,20 @@
 import Foundation
 import SwiftUI
 
+enum Appstate{
+    case succsess
+    case loading
+    case error
+}
+
 class ViewModel: ObservableObject {
     
     @Published var shoppingCart: [Item]?
     
     @Published var stuffCart: Int = 0
     @Published var totalPrice: Double = 0.00
+    
+    @Published var state = Appstate.loading
     
 //    @Published var shoppingCartContents: [Item]
     
@@ -25,17 +33,20 @@ class ViewModel: ObservableObject {
     
     func ChangeItemQuantity(item: Item, amount: Int){
         
-        let index = self.shoppingCart?.firstIndex{$0.product.id == item.product.id}  
+        let index = self.shoppingCart?.firstIndex{$0.product.id == item.product.id}
         self.shoppingCart?[index!].changeQuantity(amount: amount)
         
         stuffCart += amount
         totalPrice += Double(item.product.grossPrice)! * Double(amount)
     }
     
-    func updateShoppingCart(){
+    func updateShoppingCart(items: [ExtendedItem]?){
         if shoppingCart != nil{
             for item in shoppingCart!{
-                ChangeItemQuantity(item: item, amount: item.quantity)
+                if items != nil{
+                    let current = items!.first(where:{$0.item.product.id == item.product.id})
+                    ChangeItemQuantity(item: item, amount: current!.quantity)
+                }
             }
         }
     }
@@ -46,24 +57,36 @@ class ViewModel: ObservableObject {
                 [weak self] result in
                 self?.recieveData(result: result)
             }
+        } else {
+            state = Appstate.error
         }
     }
     
+    func getExtendednItemList() -> [ExtendedItem]{
+        var listToReturn: [ExtendedItem] = []
+        guard let items = shoppingCart else{
+            return listToReturn
+        }
+        for item in items{
+            listToReturn.append(ExtendedItem(item: item, quantity: item.quantity))
+        }
+        return listToReturn
+    }
+    
     func saveTheShoppingCart(){
-        guard let data = try? JSONEncoder().encode(shoppingCart) else {
+        guard let data = try? JSONEncoder().encode(getExtendednItemList()) else {
             return
         }
         UserDefaults.standard.set(data, forKey: "SaveShoppingCart")
     }
     
     func loadTheShoppingCart(){
-        var itemCache: [Item]?
+        var itemCache: [ExtendedItem]?
         if let data = UserDefaults.standard.data(forKey: "SaveShoppingCart"){
-            itemCache = try? JSONDecoder().decode([Item].self, from: data)
+            itemCache = try? JSONDecoder().decode([ExtendedItem].self, from: data)
         }
         if itemCache != nil && itemCache?.count != 0 {
-            shoppingCart = itemCache
-            updateShoppingCart()
+            updateShoppingCart(items: itemCache)
         }
     }
     
@@ -73,11 +96,14 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 self?.shoppingCart = items?.items
                 self?.loadTheShoppingCart()
+                self?.state = Appstate.succsess
             }
         case .failure(let error):
             DispatchQueue.main.async { [weak self] in
+                self?.state = Appstate.error
                 print(error)
             }
         }
     }
 }
+
