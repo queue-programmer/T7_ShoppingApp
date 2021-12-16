@@ -25,6 +25,9 @@ struct ContentView: View, ChangeQuantity {
         } else if viewModel.state == Appstate.succsess{
             ScrollView{
                 VStack(spacing: 0){
+                    
+                    Text("Shopping Cart")
+                            .font(.title)
                 
                     if let shoppingCart = viewModel.shoppingCart{
                         ForEach(0..<shoppingCart.count){ i in
@@ -32,7 +35,8 @@ struct ContentView: View, ChangeQuantity {
                         }
                     }
                 }
-    //            .navigationTitle("Shopping Cart")
+//               .navigationTitle("Shopping Cart")
+//                .navigationBarTitle(Text("Shopping Cart"))
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)){ _ in
                 viewModel.saveTheShoppingCart()
