@@ -25,7 +25,7 @@ class ViewModel: ObservableObject {
     
     let jsonLogic: JsonLogic = JsonLogic()
     
-    //let url: String = "https://api.jsonbin.io/b/60832bec4465377a6bc6b6e6"
+    //let url: String = "https://api.jsonbin.io/b/608071a7a2213a0c1428343f/1"
     
     init(){
         loadShoppingCart()
@@ -52,7 +52,7 @@ class ViewModel: ObservableObject {
     }
     
     func loadShoppingCart() {
-        if let url = URL(string: "https://api.jsonbin.io/b/60832bec4465377a6bc6b6e6"){
+        if let url = URL(string: "https://api.jsonbin.io/b/608071a7a2213a0c1428343f/1"){
             jsonLogic.performRequest(url){
                 [weak self] result in
                 self?.recieveData(result: result)
